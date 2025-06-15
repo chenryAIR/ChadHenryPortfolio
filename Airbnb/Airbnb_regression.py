@@ -1,7 +1,7 @@
 # Created by Chad Henry
 # Created 6.7.2025
 # Last modified 6.11.2025
-# Purpose: Prepare the data for the Airbnb analysis and dashboard.
+# Purpose: Analyze the Airbnb data.
 
 # Import necessary libraries
 import pandas as pd
@@ -20,11 +20,20 @@ import matplotlib.pyplot as plt
 # Load preprocessed Airbnb dataset
 df = pd.read_csv('airBNB_clean.csv')
 
-# Quick inspection of structure and missingness
-print(df.info())
-print(df.head())
-print(df.describe())
-print(df.isnull().mean() * 100)  # % missing in each column
+def explore(data):
+    print("DataFrame info:")
+    print(data.info(), "\n")
+
+    print("First 5 rows:")
+    print(data.head(), "\n")
+
+    print("Numeric summary:")
+    print(data.describe(), "\n")
+
+    print("Percent missing per column:")
+    print((data.isnull().mean() * 100).round(2), "\n")
+
+explore(df)
 
 # Set treatment variable: whether the listing had a review within the past 90 days
 df['recent_review'] = df['days_since_last_review90']
